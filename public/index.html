@@ -171,9 +171,13 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
   padding:22px;border:1px solid rgba(255,255,255,.12);}
 
 /* ═══════════════════════════════════════
-   GAME SCREEN
+   GAME SCREEN (BACKGROUND CHANGE)
 ═══════════════════════════════════════ */
-#sGame{background:#0d001f;padding:0;justify-content:flex-start;}
+#sGame{
+  background: #2b5cbf url('data:image/svg+xml;utf8,<svg opacity="0.1" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="10" fill="%23ffffff"/></svg>');
+  padding:0;
+  justify-content:flex-start;
+}
 
 .gtb{width:100%;display:flex;align-items:center;justify-content:space-between;
   padding:7px 12px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
@@ -204,48 +208,38 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
   height:min(96vw, calc(100svh - 112px));
   position:relative;
   flex-shrink:0;
-  /* 3D perspective container */
   perspective:1200px;
   perspective-origin:50% 20%;
 }
 
-/* ── 3D BOARD ── */
+/* ── FLAT 2D BOARD (Ludo King Style) ── */
 #board{
   position:absolute;
   inset:0;
   display:grid;
   grid-template-columns:repeat(15,1fr);
   grid-template-rows:repeat(15,1fr);
-  border-radius:10px;
-  overflow:hidden;
-  /* 3D tilt effect */
-  transform: rotateX(5deg) scale(1.0);
-  transform-origin: center bottom;
-  box-shadow:
-    0 0 0 3px rgba(255,255,255,.6),
-    0 0 0 6px rgba(255,255,255,.15),
-    0 16px 0 -3px rgba(0,0,0,.9),
-    0 20px 40px rgba(0,0,0,.95),
-    0 30px 60px rgba(0,0,0,.6),
-    inset 0 0 60px rgba(0,0,0,.05);
+  background-color: #fff;
+  border: 4px solid #333;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 /* ── CELLS ── */
 .c{display:flex;align-items:center;justify-content:center;position:relative;overflow:visible;
   border:.3px solid rgba(0,0,0,.12);}
 
-/* Corner zones — DEEP RICH colors */
-.c.rz{background:#C62828;}
-.c.bz{background:#1565C0;}
-.c.gz{background:#2E7D32;}
-.c.yz{background:#F9A825;}
+/* Corner zones — Ludo King Bright Colors */
+.c.rz{background:#E53935 !important;}
+.c.bz{background:#1E88E5 !important;}
+.c.gz{background:#43A047 !important;}
+.c.yz{background:#FDD835 !important;}
 /* inner white spawn */
 .c.sw{background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.07);}
 /* path */
 .c.pt{background:#F0F0F0;}
 /* safe star cells */
 .c.ss{background:#F0F0F0;}
-.c.ss::after{content:'★';font-size:min(2.5vw,13px);color:#bbb;position:absolute;pointer-events:none;line-height:1;}
+.c.ss::after{content:'';} /* Hide text star */
 /* home lanes */
 .c.rl{background:#EF9A9A;}
 .c.bl{background:#90CAF9;}
@@ -342,38 +336,40 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
   100%{transform:translate(-50%,-52%) scale(1);}
 }
 
-/* ── CORNER DICE WIDGETS ── */
+/* ── LUDO KING STYLE CORNER PROFILES ── */
 .cdw{
   position:absolute;
   z-index:60;
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   align-items:center;
-  gap:4px;
+  gap:8px;
   pointer-events:auto;
+  background: #1976D2;
+  border: 3px solid #FFEB3B;
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
-.cdw.TL{top:1%;left:1%;}
-.cdw.TR{top:1%;right:1%;align-items:flex-end;}
-.cdw.BL{bottom:1%;left:1%;}
-.cdw.BR{bottom:1%;right:1%;align-items:flex-end;}
+.cdw.TL{top:-2%;left:-2%;}
+.cdw.TR{top:-2%;right:-2%; flex-direction: row-reverse;}
+.cdw.BL{bottom:-2%;left:-2%;}
+.cdw.BR{bottom:-2%;right:-2%; flex-direction: row-reverse;}
 
-/* Player chip */
 .cd-chip{
-  display:flex;align-items:center;gap:4px;
-  background:rgba(0,0,0,.8);border-radius:50px;
-  padding:3px 9px 3px 3px;
-  border:1.5px solid rgba(255,255,255,.25);
-  max-width:min(22vw,80px);
-  overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+  background:transparent;border:none;padding:0;
+  max-width:min(22vw,80px);overflow:hidden;
 }
 .cd-av{
-  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  width:35px;height:35px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   font-size:10px;font-weight:900;color:#fff;overflow:hidden;
+  border: 2px solid #fff;
 }
 .cd-av img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
-.cd-chip-name{font-size:8px;font-weight:900;color:#fff;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42px;}
+.cd-chip-name{font-size:10px;font-weight:900;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42px;margin-top:4px;}
 
 /* ── PLAYER TIMER BAR ON CHIP — video-style line ── */
 .cd-tbar-wrap{
@@ -397,20 +393,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
   animation:tbFlash .35s infinite alternate;
 }
 
-/* Dice box */
+/* Dice box - Ludo King Style White Box */
 .cd-box{
-  width:min(14vw, calc((100svh - 112px)*0.135), 62px);
-  height:min(14vw, calc((100svh - 112px)*0.135), 62px);
-  border-radius:min(3vw,13px);
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  border:3px solid rgba(255,255,255,.9);
-  transition:transform .07s;
-  /* default: always show */
+  width: 45px; height: 45px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background: #fff !important;
+  box-shadow: none !important;
+  cursor:pointer; position:relative; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
 }
-.cd-box:active{transform:translateY(3px)!important;box-shadow:none!important;}
 .cd-box.disabled{opacity:.55;pointer-events:none;}
 .cd-box.rolling{animation:dRoll .07s linear infinite;}
 @keyframes dRoll{
@@ -418,16 +410,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
   50%{transform:rotate(20deg) scale(.94);}
   100%{transform:rotate(-20deg) scale(1.08);}
 }
-.cd-box.R{background:linear-gradient(145deg,#ff6b6b,#e53935,#7f0000);box-shadow:0 5px 0 #4a0000,0 6px 16px rgba(198,40,40,.65);}
-.cd-box.B{background:linear-gradient(145deg,#64b5f6,#1565c0,#002171);box-shadow:0 5px 0 #002171,0 6px 16px rgba(21,101,192,.65);}
-.cd-box.G{background:linear-gradient(145deg,#81c784,#2e7d32,#003300);box-shadow:0 5px 0 #1b5e20,0 6px 16px rgba(46,125,50,.65);}
-.cd-box.Y{background:linear-gradient(145deg,#fff176,#f9a825,#e65100);box-shadow:0 5px 0 #bf360c,0 6px 16px rgba(249,168,37,.65);}
 
 /* Active turn pulse */
 .cdw.ON .cd-box{animation:dPulse .85s ease-in-out infinite;}
 @keyframes dPulse{
-  0%,100%{box-shadow:0 5px 0 var(--ds),0 6px 16px var(--dg);}
-  50%{box-shadow:0 5px 0 var(--ds),0 6px 20px var(--dg),0 0 0 5px rgba(255,255,255,.35);}
+  0%,100%{box-shadow: 0 0 5px rgba(255,255,255,.5) !important;}
+  50%{box-shadow: 0 0 15px #FFEB3B !important;}
 }
 
 .cd-canvas{position:absolute;inset:0;width:100%;height:100%;}
@@ -436,10 +424,10 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
 .cd-val{
   font-family:'Fredoka One',cursive;
   font-size:min(5vw,22px);
-  color:#fff;
-  text-shadow:0 1px 6px rgba(0,0,0,.95),0 0 10px rgba(0,0,0,.8);
+  color: #333; /* Dark text for white background */
+  text-shadow: none;
   line-height:1;min-width:18px;text-align:center;
-  min-height:22px;
+  min-height:22px; position:absolute;
 }
 
 .cdw.OFF{opacity:.25;pointer-events:none;}

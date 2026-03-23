@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Ludo King Pro</title>
+<title>Toxic Ludo</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
@@ -463,7 +463,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
     <div class="avatar-section">
       <div class="big-avatar" id="nameAvatar" onclick="triggerAvatarUpload('new')">
         🎲
-        <label class="avatar-edit-btn">📷<input type="file" accept="image/*" id="avatarInputNew" style="display:none" onchange="handleAvatarChange(this,'new')"></label>
+        <label class="avatar-edit-btn"> <input type="file" accept="image/*" id="avatarInputNew" style="display:none" onchange="handleAvatarChange(this,'new')"></label>
       </div>
     </div>
     <input class="name-input" id="newNameInput" placeholder="Your name..." maxlength="18" 
@@ -475,7 +475,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
     <div class="or-divider"><div class="or-line"></div>OR<div class="or-line"></div></div>
     <div style="height:10px"></div>
     <button class="btn-primary btn-create" onclick="saveNewName()" style="font-size:18px;border-radius:14px;">
-      Play as Guest 🎮
+      Play as Guest 
     </button>
   </div>
 </div>
@@ -498,7 +498,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
   <!-- Logo -->
   <div class="home-hero">
     <div class="logo-text">LUDO</div>
-    <div class="logo-sub">King Pro • Multiplayer</div>
+    <div class="logo-sub">Toxic • Multiplayer</div>
   </div>
 
   <!-- Stats bar -->
@@ -584,7 +584,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Nunito',sans-serif
     <div class="avatar-section">
       <div class="big-avatar" id="profileBigAvatar" onclick="triggerAvatarUpload('profile')">
         🎲
-        <label class="avatar-edit-btn">📷<input type="file" accept="image/*" id="avatarInputProfile" style="display:none" onchange="handleAvatarChange(this,'profile')"></label>
+        <label class="avatar-edit-btn"> <input type="file" accept="image/*" id="avatarInputProfile" style="display:none" onchange="handleAvatarChange(this,'profile')"></label>
       </div>
       <input class="name-input" id="profileNameInput" placeholder="Your name..." maxlength="18" value="">
       <button class="btn-small" onclick="saveProfileName()">Save</button>
@@ -959,10 +959,10 @@ function handleAvatarChange(inp, type){
     const data = e.target.result;
     if(type==='new'){
       const el = document.getElementById('nameAvatar');
-      el.innerHTML=`<img src="${data}"><label class="avatar-edit-btn">📷<input type="file" accept="image/*" id="avatarInputNew" style="display:none" onchange="handleAvatarChange(this,'new')"></label>`;
+      el.innerHTML=`<img src="${data}"><label class="avatar-edit-btn"> <input type="file" accept="image/*" id="avatarInputNew" style="display:none" onchange="handleAvatarChange(this,'new')"></label>`;
     } else {
       const el = document.getElementById('profileBigAvatar');
-      el.innerHTML=`<img src="${data}"><label class="avatar-edit-btn">📷<input type="file" accept="image/*" id="avatarInputProfile" style="display:none" onchange="handleAvatarChange(this,'profile')"></label>`;
+      el.innerHTML=`<img src="${data}"><label class="avatar-edit-btn"> <input type="file" accept="image/*" id="avatarInputProfile" style="display:none" onchange="handleAvatarChange(this,'profile')"></label>`;
       myProfile.avatar = data;
       const homeAv = document.getElementById('homeAvatar');
       homeAv.innerHTML=`<img src="${data}">`;
@@ -1034,7 +1034,7 @@ function handleMsg(msg){
     case 'auto_skip':        showToast(`⏭️ Turn skipped`); break;
     case 'timer_tick':       updateTimerBar(msg.remaining); break;
     case 'player_disconnected': showToast(`📡 ${msg.name} disconnected`); break;
-    case 'player_removed':   showToast(`❌ Player removed (timeout)`); break;
+    case 'player_removed':   showToast(`Player removed (timeout)`); break;
     case 'chat':             onChatMsg(msg.msg); break;
     case 'game_end':         onGameEnd(msg); break;
     case 'game_over':        onGameOver(msg); break;
@@ -1125,7 +1125,7 @@ function onRoomRejoined(msg){
     showScreen('sWait');
     renderWaitSlots(msg.players, msg.max);
   }
-  showToast('✅ Rejoined game!');
+  showToast('Rejoined game!');
 }
 
 function onPlayerJoined(msg){

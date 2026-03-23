@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toxic - Chess</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+
+    <style>
+        /* Base Styling & Dark Theme */
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --primary: #6366f1;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, var(--bg-color));
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Clean Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5vw;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px); /* Glassmorphism Effect */
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #a855f7, #6366f1);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Hero Section (Main Page) */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 5vw;
+            flex-wrap: wrap;
+        }
+
+        .text-content {
+            max-width: 600px;
+        }
+
+        .text-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .text-content p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+        }
+
+        /* 3D Button CSS */
+        .btn-3d {
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #4338ca, 0 15px 20px rgba(0,0,0,0.4);
+            transition: all 0.1s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Button Press Effect */
+        .btn-3d:active {
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #4338ca, 0 5px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Chess Board 3D Container (Glassmorphism) */
+        .board-wrapper {
+            background: var(--glass-bg);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            
+            /* 3D Tilt Effect */
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        /* Hover karne par board seedha ho jayega */
+        .board-wrapper:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        #myBoard {
+            width: 450px;
+        }
+
+        /* Responsive design for Mobile */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; }
+            .board-wrapper { transform: none; margin-top: 50px; }
+            #myBoard { width: 320px; }
+            .text-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h2>♞ GrandMaster</h2>
+        <div class="nav-links">
+            <span style="margin-right: 20px; cursor:pointer;">Rooms</span>
+            <span style="cursor:pointer;">Login</span>
+        </div>
+    </div>
+
+    <div class="hero">
+        
+        <div class="text-content">
+            <h1>Checkmate Your Friends.</h1>
+            <p>Experience ultra-fast multiplayer chess. Create private rooms, invite your friends, and let others spectate your brilliant moves in real-time.</p>
+            
+            <button class="btn-3d" onclick="alert('Room Creation Logic will connect here!')">
+                Create Room ⚔️
+            </button>
+        </div>
+
+        <div class="board-wrapper">
+            <div id="myBoard"></div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+
+    <script>
+        // Board ko chalu karne ka code
+        var board = Chessboard('myBoard', {
+            position: 'start', // Start position se game shuru karo
+            draggable: true,   // Pieces ko drag and drop karne ki permission
+            dropOffBoard: 'snapback',
+            pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
+        });
+
+        // Yeh browser ki window resize hone par board ko adjust karega
+        $(window).resize(board.resize);
+    </script>
+
+</body>
+</html>
+

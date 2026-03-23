@@ -1525,10 +1525,9 @@ function onGameOver(msg){
   setTimeout(()=>showScreen('sResult'),1500);
 }
 
-
 function googleLogin() {
   google.accounts.id.initialize({
-    client_id: 'id.apps.googleusercontent.com',
+    client_id: '62240158083-cl5hbghsgo9p0tmhok4pe38j142tg57i.apps.googleusercontent.com.apps.googleusercontent.com',
     callback: (response) => {
       send({ type: 'google_auth', idToken: response.credential });
     }

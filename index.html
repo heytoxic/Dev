@@ -1525,15 +1525,16 @@ function onGameOver(msg){
   setTimeout(()=>showScreen('sResult'),1500);
 }
 
-// ══════════════════════════════════════════════════════
-//  AUTH
-// ══════════════════════════════════════════════════════
-function googleLogin(){
-  // In production: use Google Identity Services
-  // For now, just send a mock auth
-  showToast('🔗 Google Sign-in not configured yet.\nPlaying as guest.');
-  // Real: google.accounts.id.initialize({ client_id: 'YOUR_CLIENT_ID', callback: handleGoogleCredential });
-}
+
+function googleLogin() {
+  google.accounts.id.initialize({
+    client_id: 'id.apps.googleusercontent.com',
+    callback: (response) => {
+      send({ type: 'google_auth', idToken: response.credential });
+    }
+  });
+  google.accounts.id.prompt();
+  }
 
 function onAuthSuccess(msg){
   if(msg.profile){

@@ -16,7 +16,7 @@ const server = http.createServer(app);
 const wss    = new WebSocket.Server({ server });
 
 app.use(cors({
-  origin: ['https://dev-yndg.onrender.com', 'http://localhost:3000', /\.onrender\.com$/],
+  origin: ['https://dev-1-bjb7.onrender.com', 'http://localhost:3000', /\.onrender\.com$/],
   credentials: true
 }));
 app.use(express.json());

@@ -1,5 +1,5 @@
 {
-  "name": "ludo-king-pro",
+  "name": "toxic",
   "version": "2.0.0",
   "description": "Professional Ludo King style multiplayer game",
   "main": "server.js",
